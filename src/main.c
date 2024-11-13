@@ -20,7 +20,6 @@ void pinMode(GPIO_TypeDef *Port, uint32_t BitNumber, uint32_t Mode);
 void main_menu();
 uint16_t random_range(uint16_t min, uint16_t max);
 void game_over(int score);
-
 // Global variable to keep track of milliseconds
 volatile uint32_t milliseconds;
 
@@ -49,7 +48,7 @@ int main(void) {
     int vmoved = 0;
     int score = 0;
     //timer is multiplied by 20 as the loop runs every 50ms
-    int timer = 600;
+    int timer = 300; //15s
     uint16_t x = 50;
     uint16_t y = 50;
     uint16_t oldx = x;
@@ -76,7 +75,7 @@ int main(void) {
 
     //reset score and timer
     score = 0;
-    timer = 600;
+    timer = 300;
 
     while (timer > 0) {
         // Reset movement flags
@@ -161,7 +160,7 @@ int main(void) {
         printDecimal(timer/20);
         eputs("\n");
         // Delay to reduce flicker
-        delay(50);
+        delay(15);
     }
 
     //clear screen only once so it won't flicker in the loop below
@@ -179,6 +178,13 @@ int main(void) {
 uint16_t random_range(uint16_t min, uint16_t max) {
     return (rand() % (max - min + 1)) + min;
 }
+
+void led_death() {
+    GPIOA->ODR |= (1 << 5);
+    delay(500);
+    GPIOA->ODR &= ~(1 << 5);
+}
+
 
 void main_menu() {
     printText("Welcome to", (SCREEN_WIDTH / 2) - 32, (SCREEN_HEIGHT / 2) - 40, RGBToWord(0xff, 0xff, 0xff), 0);
