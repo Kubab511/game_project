@@ -1,3 +1,8 @@
+// Microprocessors - Game project
+// By Andrew Cotter, Erik Hansen, Jakub Barabasz
+// Date: 13.11.2024
+// Description: A simple game where the player controls a truck and has to collect packages while avoiding the edges of the screen. The game is controlled using the buttons on the board. The player can move the truck up, down, left, and right. The game ends when the timer runs out. The player can restart the game by pressing any button.
+
 #include <stm32f031x6.h>
 #include <stdbool.h>
 #include "buttons.h"
